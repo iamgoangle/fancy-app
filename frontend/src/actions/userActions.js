@@ -1,10 +1,10 @@
 import request from 'request-promise';
-import APP_CONFIG from '../config';
+import APP_CONFIG from '../config/config';
 
 const loginUser = (form) => {
   return (dispatch) => {
     const options = {
-      uri: `${APP_CONFIG.api_endpoint}/signin`,
+      uri: APP_CONFIG.API_ENDPOINT().LOGIN,
       method: 'POST',
       form: { ...form },
       json: true

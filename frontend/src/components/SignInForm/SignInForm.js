@@ -1,5 +1,4 @@
 import React from "react";
-
 import { Field, reduxForm } from 'redux-form';
 import { TextField } from 'redux-form-material-ui'
 import { Well, Panel, Button, Col, Row } from "react-bootstrap";
@@ -26,10 +25,11 @@ class SignInForm extends React.Component {
   }
 
   render() {
-    const { handleSubmit, pristine, submitting } = this.props
+    console.log(this.props);
+    const { handleSubmit, handleLogin, pristine, submitting } = this.props
 
     return (
-      <form name="SignInForm" onSubmit={ handleSubmit(this.submit) }>
+      <form name="SignInForm" onSubmit={ handleSubmit(e => handleLogin(e)) }>
         <Well>
           <Panel>
               <Col xs={6} md={6}>
@@ -42,7 +42,8 @@ class SignInForm extends React.Component {
                     <Field
                         id="username"
                         name="username" 
-                        component={ TextField } 
+                        component={ TextField }
+                        autoComplete="off"
                         hintText="Username"
                         type="text" />
                   </div>
@@ -65,7 +66,7 @@ class SignInForm extends React.Component {
                     bsSize="large" block>
                     Login
                   </Button>
-                </div>    
+                </div>
               </Col>
 
               <Col xs={6} md={6}>

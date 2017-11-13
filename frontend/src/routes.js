@@ -1,9 +1,9 @@
-import SignInForm from './components/SignInForm';
+import SignIn from './containers/SignIn';
 
 const routes = [
   {
     path: '/',
-    component: SignInForm
+    component: SignIn
   }
 ];
 
