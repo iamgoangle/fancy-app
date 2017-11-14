@@ -1,7 +1,5 @@
 const APP_CONFIG = {
-  API_ENDPOINT: () => ({
-    LOGIN: 'http://localhost:3000'
-  })
+  API_ENDPOINT: 'http://localhost:5000/api'
 }
 
 export default APP_CONFIG;

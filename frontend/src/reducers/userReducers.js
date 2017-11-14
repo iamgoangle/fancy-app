@@ -1,7 +1,8 @@
 let initState = {
   user: {
       user: '',
-      preference: {}
+      token: '',
+      profile: {}
   }
 };
 

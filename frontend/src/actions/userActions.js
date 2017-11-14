@@ -4,7 +4,7 @@ import APP_CONFIG from '../config/config';
 const loginUser = (form) => {
   return (dispatch) => {
     const options = {
-      uri: APP_CONFIG.API_ENDPOINT().LOGIN,
+      uri: `${APP_CONFIG.API_ENDPOINT}/login`,
       method: 'POST',
       form: { ...form },
       json: true
@@ -15,8 +15,9 @@ const loginUser = (form) => {
         dispatch ({
           type: 'LOGIN_USER',
           payload: {
-            user: response.user.local.username,
-            preference: response.user
+            user: response.data.user,
+            token: response.data.token,
+            profile: response.data.profile
           }
         });
       });

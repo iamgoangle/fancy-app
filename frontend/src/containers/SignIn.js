@@ -8,7 +8,7 @@ import SignInForm from '../components/SignInForm';
 const mapStateToProps = (state) => {
   return {
     user: state.user
-  }
+  };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
@@ -18,12 +18,32 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 };
 
 class SignIn extends React.Component {
+  constructor (props) {
+    super(props);
+    this.state = {
+      user: {},
+      redirectToUserPreference: false
+    };
+    this.handleLogin = this.handleLogin.bind(this);
+  }
+
   handleLogin (formValue) {
-    console.log('test');
-    console.log(formValue);
+    this.props.loginUser(formValue);
+  }
+
+  componentWillReceiveProps (nextProps) {
+    localStorage.setItem('user', nextProps.user.user);
+    localStorage.setItem('token', nextProps.user.token);
+    this.setState({ user: { ...nextProps.user }, redirectToUserPreference: true });
   }
 
   render() {
+    const { redirectToUserPreference } = this.state;
+    
+    if (redirectToUserPreference) {
+      alert('redirect na ja');
+    }
+    
     return (
       <SignInForm handleLogin={ this.handleLogin } />
     )

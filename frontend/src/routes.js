@@ -1,7 +1,7 @@
 import SignIn from './containers/SignIn';
 
 const routes = [
-  {
+{
     path: '/',
     component: SignIn
   }

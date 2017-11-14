@@ -20,16 +20,12 @@ class SignInForm extends React.Component {
     super(props);
   }
 
-  submit (formValue) {
-    console.log(formValue);
-  }
-
   render() {
     console.log(this.props);
     const { handleSubmit, handleLogin, pristine, submitting } = this.props
 
     return (
-      <form name="SignInForm" onSubmit={ handleSubmit(e => handleLogin(e)) }>
+      <form name="SignInForm" onSubmit={ handleSubmit((e) => handleLogin(e)) }>
         <Well>
           <Panel>
               <Col xs={6} md={6}>
