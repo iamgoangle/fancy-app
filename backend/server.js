@@ -6,6 +6,7 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
+const cors = require('cors');
 
 const helmet = require('helmet');
 
@@ -22,7 +23,7 @@ require('./config/passport')(passport);
 // =======================
 // configuration =========
 // =======================
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 
 try {
   mongoose.connect(APP_CONFIG.MONGO_URL, {
@@ -46,16 +47,26 @@ logger.info('golf test');
 app.use(helmet());
 app.disable('x-powered-by');
 
+const corsOption = {
+  origin: 'http://localhost:3001',
+  credentials: true,
+}
+
 // =======================
 // route =================
 // =======================
 const UserController = require('./controllers/User');
 const Authentication = require('./controllers/Authentication');
 
-app.post('/api/login', Authentication);
-app.post('/api/user/signup', UserController.signup);
-app.get('/api/user/getUsers', passport.authenticate('jwt', ({ session: false })), (req, res) => { res.json({ message: 'Cannot see'}); }, UserController.getUsers);
+app.post('/api/login', cors(corsOption), Authentication);
+app.post('/api/user/signup', cors(corsOption), UserController.signup);
+app.get('/api/user/getUsers', 
+  cors(corsOption), 
+  passport.authenticate('jwt', ({ session: false })), 
+  UserController.getUsers
+);
 
 app.listen(port, () => {
-  logger.info(`Start the server at http://localhost:${port}`);
+  console.log(`Start the server at http://localhost:${port}`);
+  console.log(`CORS-enabled web server`);
 });

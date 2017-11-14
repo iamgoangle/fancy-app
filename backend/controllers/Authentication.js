@@ -28,10 +28,16 @@ const authenticate = (req, res, next) => {
           expiresIn: APP_CONFIG.TOKEN.EXPIRE
         });
 
-        res.json({
+        // load profile
+
+        res.status(200).json({
           success: true,
-          message: 'Create new token 8h',
-          token: token
+          message: 'Logged-in success',
+          data: {
+            user: user.username,
+            token: token,
+            profile: {}
+          }
         });
       } else {
         res.status(401).json({
