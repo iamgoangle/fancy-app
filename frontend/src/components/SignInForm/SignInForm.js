@@ -7,21 +7,13 @@ import { Link } from "react-router-dom";
 
 import styles from "./SignInForm.scss";
 
-// const mapStateToProps = (state) => ({ user: state.user });
-
-// const mapDispatchToProps = (dispatch, ownProps) => {
-//   return bindActionCreators({
-//     loginUser: loginUser
-//   }, dispatch);
-// };
-
 class SignInForm extends React.Component {
   constructor (props) {
     super(props);
+    this.state = {};
   }
 
   render() {
-    console.log(this.props);
     const { handleSubmit, handleLogin, pristine, submitting } = this.props
 
     return (
@@ -36,12 +28,12 @@ class SignInForm extends React.Component {
                       <i className="fa fa-user-circle-o" aria-hidden="true"></i>
                     </label>
                     <Field
-                        id="username"
-                        name="username" 
-                        component={ TextField }
-                        autoComplete="off"
-                        hintText="Username"
-                        type="text" />
+                      id="username"
+                      name="username"
+                      component={ TextField }
+                      autoComplete="off"
+                      hintText="Username"
+                      type="text" />
                   </div>
 
                   <div className="form-group">
@@ -49,11 +41,11 @@ class SignInForm extends React.Component {
                       <i className="fa fa-key" aria-hidden="true"></i>
                     </label>
                     <Field
-                        id="password"
-                        name="password" 
-                        component={ TextField } 
-                        hintText="Password"
-                        type="password" />
+                      id="password"
+                      name="password" 
+                      component={ TextField }
+                      hintText="Password"
+                      type="password" />
                   </div>
 
                   <Button type="submit" 
