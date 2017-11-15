@@ -8,6 +8,10 @@ const APP_CONFIG = {
   MONGO_URL: 'mongodb://localhost/fancy-app',
   TOKEN: {
     EXPIRE: '5m'
+  },
+  CORS: {
+    origin: 'http://localhost:3000',
+    credentials: true
   }
 };
 

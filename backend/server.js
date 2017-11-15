@@ -39,18 +39,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(morgan('dev'));
 
-logger.info('golf test');
-
 // =======================
 // security ==============
 // =======================
 app.use(helmet());
 app.disable('x-powered-by');
 
-const corsOption = {
-  origin: 'http://localhost:3001',
-  credentials: true,
-}
+const corsOption = { ...APP_CONFIG.CORS };
 
 // =======================
 // route =================
@@ -68,5 +63,5 @@ app.get('/api/user/getUsers',
 
 app.listen(port, () => {
   console.log(`Start the server at http://localhost:${port}`);
-  console.log(`CORS-enabled web server`);
+  console.log(`CORS-enabled web server with options ${JSON.stringify(corsOption)}`);
 });

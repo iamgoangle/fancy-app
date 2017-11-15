@@ -28,7 +28,7 @@ const authenticate = (req, res, next) => {
           expiresIn: APP_CONFIG.TOKEN.EXPIRE
         });
 
-        // load profile
+        // TODO: Golf load profile
 
         res.status(200).json({
           success: true,
