@@ -14,7 +14,8 @@ import {
   FormControl,
   HelpBlock,
   ControlLabel,
-  Radio
+  Radio,
+  Button
 } from 'react-bootstrap';
 import Divider from 'material-ui/Divider';
 import styles from './LeftPane.scss';
@@ -145,6 +146,20 @@ class RightPane extends React.Component {
                       Automatically add Fancy'd items to the Category list.
                     </HelpBlock>
                     <Radio>Test</Radio>
+                  </FormGroup>
+                </Col>
+              </Row>
+
+              <Divider />
+              <Divider />
+
+              <Row>
+                <Col md={3} />
+                <Col md={9}>
+                  <FormGroup>
+                    <Button>
+                      Save Preference
+                    </Button>
                   </FormGroup>
                 </Col>
               </Row>
