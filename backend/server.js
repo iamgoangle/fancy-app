@@ -51,15 +51,30 @@ const corsOption = { ...APP_CONFIG.CORS };
 // route =================
 // =======================
 const UserController = require('./controllers/User');
+const CurrencyController = require('./controllers/Currency');
+const TimezoneController = require('./controllers/Timezone');
+const LanguageController = require('./controllers/Language');
 const Authentication = require('./controllers/Authentication');
 
+// authentication
 app.post('/api/login', cors(corsOption), Authentication);
+
+// user
 app.post('/api/user/signup', cors(corsOption), UserController.signup);
 app.get('/api/user/getUsers', 
   cors(corsOption), 
   passport.authenticate('jwt', ({ session: false })), 
   UserController.getUsers
 );
+
+// currency
+app.get('/api/currency/getCurrencies', cors(corsOption), CurrencyController);
+
+// timezone
+app.get('/api/timezone/getTimezones', cors(corsOption), TimezoneController);
+
+// language
+app.get('/api/language/getLanguages', cors(corsOption), LanguageController);
 
 app.listen(port, () => {
   console.log(`Start the server at http://localhost:${port}`);
