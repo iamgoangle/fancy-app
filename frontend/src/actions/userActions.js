@@ -15,59 +15,105 @@ const loginUser = (form) => {
         dispatch ({
           type: 'LOGIN_USER',
           payload: {
-            user: response.data.user,
-            token: response.data.token,
-            profile: response.data.profile
+            user : {
+              user: response.data.user,
+              token: response.data.token,
+              profile: response.data.profile
+            },
+            isAuthenticated: true
           }
         });
       });
   }
 };
 
-const updateUserPreference = (form) => {
+const getUserProfile = (username) => {
   return (dispatch) => {
-    const userIdForUpdate = { 'local.username': form.userPreference.user };
-    const formData = { ...form };
-    const payload = {
-      content: {
-        category_list: formData.category_list.checked
-      },
-      privacy: {
-        message: formData.category_list.checked,
-        profile_visibility: formData.category_list.checked
-      },
-      localization: {
-        currency: formData.currency.selected,
-        timezone: formData.timezone.selected,
-        lang: formData.language.selected
-      }
-    };
-
     const options = {
-      uri: `${APP_CONFIG.api_endpoint}/updateUserPreference`,
+      uri: `${APP_CONFIG.API_ENDPOINT}/user/${username}`,
       method: 'POST',
-      body: {
-        userIdForUpdate,
-        payload
+      headers: {
+        'Access-Control-Allow-Origin': 'http://localhost:3000',
+        'Access-Control-Allow-Methods': 'POST,GET,OPTIONS',
+        'x-access-token': window.localStorage.getItem('token')
       },
       json: true
     };
-
+  
     return request(options)
       .then(response => {
         console.log(response);
         dispatch ({
-          type: 'UPDATE_USER',
+          type: 'GET_USER_PROFILE',
           payload: {
-            user: response.user.local.username,
-            preference: response.user
+            user : {
+              user: response.data.user,
+              token: window.localStorage.getItem('token'),
+              profile: response.data.profile
+            },
+            isAuthenticated: true
           }
         });
       });
   }
 };
 
+const updateUserPreference = (userPayload) => {
+  return {
+    type: 'UPDATE_USER_PREFERENCE',
+    payload: { 
+      user: { 
+        ...userPayload 
+      } 
+    }
+  };
+};
+
+// const updateUserPreference = (form) => {
+//   return (dispatch) => {
+//     const userIdForUpdate = { 'local.username': form.userPreference.user };
+//     const formData = { ...form };
+//     const payload = {
+//       content: {
+//         category_list: formData.category_list.checked
+//       },
+//       privacy: {
+//         message: formData.category_list.checked,
+//         profile_visibility: formData.category_list.checked
+//       },
+//       localization: {
+//         currency: formData.currency.selected,
+//         timezone: formData.timezone.selected,
+//         lang: formData.language.selected
+//       }
+//     };
+
+//     const options = {
+//       uri: `${APP_CONFIG.api_endpoint}/updateUserPreference`,
+//       method: 'POST',
+//       body: {
+//         userIdForUpdate,
+//         payload
+//       },
+//       json: true
+//     };
+
+//     return request(options)
+//       .then(response => {
+//         console.log(response);
+//         dispatch ({
+//           type: 'UPDATE_USER',
+//           payload: {
+//             user: response.user.local.username,
+//             preference: response.user
+//           }
+//         });
+//       });
+//   }
+// };
+
 export {
   loginUser,
+  getUserProfile,
   updateUserPreference
 };

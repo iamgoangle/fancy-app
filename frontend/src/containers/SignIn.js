@@ -2,6 +2,8 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
+import { Redirect } from 'react-router-dom';
+
 import { loginUser } from '../actions/userActions';
 import SignInForm from '../components/SignInForm';
 
@@ -32,8 +34,8 @@ class SignIn extends React.Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    localStorage.setItem('user', nextProps.user.user);
-    localStorage.setItem('token', nextProps.user.token);
+    localStorage.setItem('user', nextProps.user.user.user);
+    localStorage.setItem('token', nextProps.user.user.token);
     this.setState({ user: { ...nextProps.user }, redirectToUserPreference: true });
   }
 
@@ -41,7 +43,9 @@ class SignIn extends React.Component {
     const { redirectToUserPreference } = this.state;
     
     if (redirectToUserPreference) {
-      alert('redirect na ja');
+      return (
+        <Redirect to='UserPreference' />
+      )
     }
     
     return (
