@@ -8,7 +8,15 @@ const UserSchema = new Schema({
     unique: true
   },
   password: String,
-  admin: Boolean
+  admin: Boolean,
+  profile: {
+    language: String,
+    timezone: Number,
+    currency: String,
+    profile_visibility: Number,
+    message: Number,
+    category_list: Number
+  }
 });
 
-module.exports = mongoose.model('User', UserSchema);
+module.exports = mongoose.model('users', UserSchema);

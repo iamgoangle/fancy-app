@@ -7,7 +7,7 @@ const APP_CONFIG = {
   API_SECRET: 'secretfortaskworld',
   MONGO_URL: 'mongodb://localhost/fancy-app',
   TOKEN: {
-    EXPIRE: '5m'
+    EXPIRE: '60m'
   },
   CORS: {
     origin: 'http://localhost:3000',

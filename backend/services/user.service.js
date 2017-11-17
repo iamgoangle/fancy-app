@@ -1,11 +1,20 @@
-const Users = require('../models/user');
+const User = require('../models/user');
+
+const getUserByUsername = async (username) => {
+  return User.findOne({ 'username': username }, { password: 0, __v: 0 }, (err, user) => {
+    if (err) {
+      throw err;
+    }
+    
+    return user;
+  });
+};
 
 const updateUserPreference = async (request) => {
-  console.log('request => ', request);
   const userIdForUpdate = request.userIdForUpdate;
   const payload = request.payload;
 
-  Users.update(userIdForUpdate, { $set: { ...payload } }, (err, user) => {
+  User.update(userIdForUpdate, { $set: { ...payload } }, (err, user) => {
     if (err) {
       throw err;
     }
@@ -15,5 +24,6 @@ const updateUserPreference = async (request) => {
 };
 
 module.exports = {
+  getUserByUsername,
   updateUserPreference
 };

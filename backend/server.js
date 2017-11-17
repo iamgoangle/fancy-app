@@ -46,6 +46,7 @@ app.use(helmet());
 app.disable('x-powered-by');
 
 const corsOption = { ...APP_CONFIG.CORS };
+app.use(cors(corsOption));
 
 // =======================
 // route =================
@@ -57,24 +58,33 @@ const LanguageController = require('./controllers/Language');
 const Authentication = require('./controllers/Authentication');
 
 // authentication
-app.post('/api/login', cors(corsOption), Authentication);
+app.post('/api/login', Authentication);
 
 // user
-app.post('/api/user/signup', cors(corsOption), UserController.signup);
-app.get('/api/user/getUsers', 
-  cors(corsOption), 
+app.post('/api/user/signup', UserController.signup);
+app.options('/api/user/:username');
+app.post('/api/user/:username',
+  passport.authenticate('jwt', ({ session: false })),
+  UserController.getUserByUsername
+);
+app.options('/api/user/changePreference');
+app.post('/api/user/changePreference',
+  passport.authenticate('jwt', ({ session: false })),
+  UserController.getUserByUsername
+);
+app.get('/api/user/getUsers',
   passport.authenticate('jwt', ({ session: false })), 
   UserController.getUsers
 );
 
 // currency
-app.get('/api/currency/getCurrencies', cors(corsOption), CurrencyController);
+app.get('/api/currency/getCurrencies', CurrencyController);
 
 // timezone
-app.get('/api/timezone/getTimezones', cors(corsOption), TimezoneController);
+app.get('/api/timezone/getTimezones', TimezoneController);
 
 // language
-app.get('/api/language/getLanguages', cors(corsOption), LanguageController);
+app.get('/api/language/getLanguages', LanguageController);
 
 app.listen(port, () => {
   console.log(`Start the server at http://localhost:${port}`);

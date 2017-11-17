@@ -19,7 +19,8 @@ const authenticate = (req, res, next) => {
       if (HashService.compareHash(user.password, req.body.password)) {
         const payload = {
           username: user.username,
-          admin: user.admin
+          admin: user.admin,
+          profile: user.profile
         };
 
         // generate token with payload
@@ -28,15 +29,13 @@ const authenticate = (req, res, next) => {
           expiresIn: APP_CONFIG.TOKEN.EXPIRE
         });
 
-        // TODO: Golf load profile
-
         res.status(200).json({
           success: true,
           message: 'Logged-in success',
           data: {
             user: user.username,
             token: token,
-            profile: {}
+            profile: user.profile
           }
         });
       } else {
