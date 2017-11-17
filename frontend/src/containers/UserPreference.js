@@ -33,6 +33,7 @@ class UserPreference extends React.Component {
       timezones: []
     };
 
+    // get user profile when refresh or landing to this page
     this.props.getUserProfile(window.localStorage.getItem('user'));
   }
 

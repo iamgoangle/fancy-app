@@ -33,8 +33,6 @@ const getUserProfile = (username) => {
       uri: `${APP_CONFIG.API_ENDPOINT}/user/${username}`,
       method: 'POST',
       headers: {
-        'Access-Control-Allow-Origin': 'http://localhost:3000',
-        'Access-Control-Allow-Methods': 'POST,GET,OPTIONS',
         'x-access-token': window.localStorage.getItem('token')
       },
       json: true
@@ -69,51 +67,45 @@ const updateUserPreference = (userPayload) => {
   };
 };
 
-// const updateUserPreference = (form) => {
-//   return (dispatch) => {
-//     const userIdForUpdate = { 'local.username': form.userPreference.user };
-//     const formData = { ...form };
-//     const payload = {
-//       content: {
-//         category_list: formData.category_list.checked
-//       },
-//       privacy: {
-//         message: formData.category_list.checked,
-//         profile_visibility: formData.category_list.checked
-//       },
-//       localization: {
-//         currency: formData.currency.selected,
-//         timezone: formData.timezone.selected,
-//         lang: formData.language.selected
-//       }
-//     };
+const submitChangeUserPreference = (user) => {
+  return (dispatch) => {
+    const userIdForUpdate = user.user.user;
+    const newProfile = user.user.profile;
 
-//     const options = {
-//       uri: `${APP_CONFIG.api_endpoint}/updateUserPreference`,
-//       method: 'POST',
-//       body: {
-//         userIdForUpdate,
-//         payload
-//       },
-//       json: true
-//     };
+    const options = {
+      uri: `${APP_CONFIG.API_ENDPOINT}/user/updateUserPreference`,
+      method: 'PATCH',
+      body: {
+        userIdForUpdate: userIdForUpdate,
+        payload: newProfile
+      },
+      headers: {
+        'x-access-token': window.localStorage.getItem('token')
+      },
+      json: true
+    };
 
-//     return request(options)
-//       .then(response => {
-//         console.log(response);
-//         dispatch ({
-//           type: 'UPDATE_USER',
-//           payload: {
-//             user: response.user.local.username,
-//             preference: response.user
-//           }
-//         });
-//       });
-//   }
-// };
+    return request(options)
+      .then(response => {
+        console.log(response);
+        dispatch ({
+          type: 'SUBMIT_CHANGE_USER_PREFERENCE',
+          payload: {
+            user : {
+              user: response.data.user,
+              token: window.localStorage.getItem('token'),
+              profile: response.data.profile
+            },
+            isAuthenticated: true
+          }
+        });
+      });
+  }
+};
 
 export {
   loginUser,
   getUserProfile,
-  updateUserPreference
+  updateUserPreference,
+  submitChangeUserPreference
 };

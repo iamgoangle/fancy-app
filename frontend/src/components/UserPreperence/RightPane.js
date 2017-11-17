@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { getUserProfile, updateUserPreference } from '../../actions/userActions';
-
-import DropDownMenu from 'material-ui/DropDownMenu';
-import MenuItem from 'material-ui/MenuItem';
+import { 
+  getUserProfile, 
+  updateUserPreference, 
+  submitChangeUserPreference 
+} from '../../actions/userActions';
 
 import {
   Row,
@@ -31,7 +32,8 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
   return bindActionCreators({
     getUserProfile,
-    updateUserPreference
+    updateUserPreference,
+    submitChangeUserPreference
   }, dispatch);
 }
 class RightPane extends React.Component {
@@ -44,24 +46,24 @@ class RightPane extends React.Component {
       privacy: {
         profileVisibility: [
           {
-            id: 0,
+            id: "0",
             value: 'Everyone'
           }, {
-            id: 1,
+            id: "1",
             value: 'Private'
           }
         ],
         message: [
           {
-            id: 0,
+            id: "0",
             value: 'Everyone'
           },
           {
-            id: 1,
+            id: "1",
             value: 'People you follow'
           },
           {
-            id: 3,
+            id: "3",
             value: 'No one'
           }
         ]
@@ -69,11 +71,11 @@ class RightPane extends React.Component {
       content: {
         categoryList: [
           {
-            id: 0,
+            id: "0",
             value: 'Enable'
           },
           {
-            id: 1,
+            id: "1",
             value: 'Disable'
           }
         ]
@@ -136,7 +138,9 @@ class RightPane extends React.Component {
 
   handleOnSubmitUserPreference () {
     alert('submit change');
-    console.log(this.props.user);
+    const user = { ...this.props.user };
+    console.log(user);
+    this.props.submitChangeUserPreference(user);
   }
   
   render() {
@@ -251,7 +255,7 @@ class RightPane extends React.Component {
                             <Radio name="radio_profile_visibility"
                               key={ i }
                               inline
-                              checked={ user.profile.profile_visibility == v.id }
+                              checked={ user.profile.profile_visibility === v.id }
                               onChange={ e => this.handleOnChangeProfileVisibility(e) }
                               value={ v.id }>
                               { v.value }
@@ -269,7 +273,7 @@ class RightPane extends React.Component {
                             <Radio name="radio_message"
                               key={ i }
                               inline
-                              checked={ user.profile.message == v.id }
+                              checked={ user.profile.message === v.id }
                               onChange={ e => this.handleOnChangeProfileMessage(e) }
                               value={ v.id }>
                               { v.value }
@@ -303,7 +307,7 @@ class RightPane extends React.Component {
                           <Radio name="radio_category_list"
                             key={i}
                             inline
-                            checked={ user.profile.category_list == v.id }
+                            checked={ user.profile.category_list === v.id }
                             onChange={ e => this.handleOnChangeContentCategoryList(e) }
                             value={ v.id }>
                             { v.value }

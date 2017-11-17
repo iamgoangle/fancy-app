@@ -16,7 +16,10 @@ const userReducer = (state = initState, action) => {
       return { ...state, ...action.payload };
     
     case 'UPDATE_USER_PREFERENCE':
-      return { ...state, ...action.payload }
+      return { ...state, ...action.payload };
+
+    case 'SUBMIT_CHANGE_USER_PREFERENCE':
+      return { ...state, ...action.payload };
 
     case 'UPDATE_USER':
       return { ...state, ...action.payload };
