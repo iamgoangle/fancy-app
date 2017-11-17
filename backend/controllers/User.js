@@ -41,9 +41,6 @@ const getUsers = (req, res, next) => {
 const getUserByUsername = async (req, res, next) => {
   try {
     const user = await userService.getUserByUsername(req.params.username);
-    res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
-    res.header('Access-Control-Allow-Headers', 'x-access-token');
-    res.header('Access-Control-Allow-Methods', 'POST,GET,OPTIONS');
 
     res.status(200).json({
       success: true,
@@ -62,31 +59,29 @@ const getUserByUsername = async (req, res, next) => {
   }
 };
 
-const updateUserPreference = async (req, res, next) => {
+const setUserPreference = async (req, res, next) => {
   try {
-    const result = await userService.updateUserPreference(req.body);
-    res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
-    res.header('Access-Control-Allow-Headers', 'x-access-token');
-    res.header('Access-Control-Allow-Methods', 'POST,GET,OPTIONS');
+    const user = await userService.setUserPreference(req.body);
 
     res.status(200).json({
       success: true,
-      message: 'Return user profile',
-      data: result
+      message: 'User preference has been updated',
+      data: {
+        user: user.username,
+        profile: user.profile
+      }
     });
   } catch (err) {
     res.status(500).json({
       success: false,
-      message: 'Could not get user profile lists',
-      data: {}
-    });
+      message: 'Could not update user preference'
+    })
   }
-};
-
+}
 
 module.exports = {
   signup,
   getUsers,
   getUserByUsername,
-  updateUserPreference
+  setUserPreference
 };

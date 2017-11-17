@@ -11,11 +11,11 @@ const UserSchema = new Schema({
   admin: Boolean,
   profile: {
     language: String,
-    timezone: Number,
+    timezone: String,
     currency: String,
-    profile_visibility: Number,
-    message: Number,
-    category_list: Number
+    profile_visibility: String,
+    message: String,
+    category_list: String
   }
 });
 

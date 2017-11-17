@@ -1,29 +1,27 @@
 const User = require('../models/user');
 
 const getUserByUsername = async (username) => {
-  return User.findOne({ 'username': username }, { password: 0, __v: 0 }, (err, user) => {
-    if (err) {
-      throw err;
-    }
-    
-    return user;
-  });
+  return await User.findOne({ 'username': username }, { password: 0, __v: 0 });
 };
 
 const updateUserPreference = async (request) => {
   const userIdForUpdate = request.userIdForUpdate;
   const payload = request.payload;
 
-  User.update(userIdForUpdate, { $set: { ...payload } }, (err, user) => {
-    if (err) {
-      throw err;
-    }
+  return await User.update(userIdForUpdate, { $set: { ...payload } });
+};
 
-    return user;
-  });
+const setUserPreference = async (payload) => {
+  const userIdForUpdate = payload.userIdForUpdate;
+  const newProfile = {
+    profile: { ...payload.payload }
+  };
+
+  return await User.findOneAndUpdate({ username: userIdForUpdate }, { $set: newProfile }, { new: true });
 };
 
 module.exports = {
   getUserByUsername,
-  updateUserPreference
+  updateUserPreference,
+  setUserPreference
 };

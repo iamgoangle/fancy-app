@@ -62,19 +62,22 @@ app.post('/api/login', Authentication);
 
 // user
 app.post('/api/user/signup', UserController.signup);
+
 app.options('/api/user/:username');
 app.post('/api/user/:username',
   passport.authenticate('jwt', ({ session: false })),
   UserController.getUserByUsername
 );
-app.options('/api/user/changePreference');
-app.post('/api/user/changePreference',
-  passport.authenticate('jwt', ({ session: false })),
-  UserController.getUserByUsername
-);
+
 app.get('/api/user/getUsers',
   passport.authenticate('jwt', ({ session: false })), 
   UserController.getUsers
+);
+
+app.options('/api/user/updateUserPreference');
+app.patch('/api/user/updateUserPreference',
+  passport.authenticate('jwt', ({ session: false})),
+  UserController.setUserPreference
 );
 
 // currency
