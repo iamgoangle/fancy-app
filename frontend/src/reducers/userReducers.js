@@ -11,6 +11,9 @@ const userReducer = (state = initState, action) => {
   switch (action.type) {
     case 'GET_USER_PROFILE':
       return { ...state, ...action.payload };
+    
+    case 'SIGNUP_USER':
+      return { ...state, ...action.payload };
 
     case 'LOGIN_USER':
       return { ...state, ...action.payload };

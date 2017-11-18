@@ -1,13 +1,20 @@
-import React from 'react'
-import { Field, reduxForm, isDirty } from 'redux-form';
-// import { TextField } from 'redux-form-material-ui'
+import React from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { Field, reduxForm } from 'redux-form';
 import TextField from 'material-ui/TextField'
-import { Well, Panel, Button, Col, Row, Clearfix } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Button, Col, Row, Clearfix } from "react-bootstrap";
 
 import styles from "./SignUpForm.scss";
 import { error } from 'util';
 
+const mapStateToProps = (state, ownProps) => {
+  return {
+    user: state.user
+  }
+};
+
+// config validate rule
 const validate = (values) => {
   const errors = [];
   const requireFields = [
@@ -29,6 +36,7 @@ const renderTextField = ({
   floatingLabelText,
   hintText,
   errorStyle,
+  warning,
   meta: { touched, error },
   ...custom
 }) => (
@@ -36,19 +44,20 @@ const renderTextField = ({
     hintText={ hintText }
     floatingLabelText={ floatingLabelText }
     fullWidth={ true }
-    errorText={ touched && error }
+    errorText={ touched && (error || warning)}
     errorStyle={ errorStyle }
     {...input}
     {...custom}
     />
 );
+
 class SignUpForm extends React.Component {
   constructor (props) {
     super(props);
   }
-
+  
   render () {
-    const { handleSubmit, pristine, reset, submitting } = this.props;
+    const { handleSubmit, pristine, submitting, handleSignup } = this.props;
     const textfieldStyles = {
       floatingLabelStyle: {
         color: '#FFF'
@@ -62,7 +71,7 @@ class SignUpForm extends React.Component {
     };
     
     return (
-      <form onSubmit={ handleSubmit }>
+      <form onSubmit={ handleSubmit(e => handleSignup(e)) }>
         <div className={ styles.signup_form }>
           <Row className={ styles.top_form }>
             <Col xs={9} md={9} className={ styles.header }>
@@ -87,6 +96,8 @@ class SignUpForm extends React.Component {
                   hintText="Specific your username"
                   hintStyle={ textfieldStyles.hintStyle }
                   errorStyle={ textfieldStyles.errorStyle }
+                  warning={ !this.props.user.success && this.props.user.message }
+                  type="text"
                   autoComplete="off" />
               </div>
 
@@ -101,14 +112,16 @@ class SignUpForm extends React.Component {
                   hintText="Choose your password"
                   hintStyle={ textfieldStyles.hintStyle }
                   errorStyle={ textfieldStyles.errorStyle }
+                  type="password"
                   autoComplete="off" />
               </div>
 
               <div>
                 <Button 
-                  bsSize="large" 
+                  bsSize="large"
+                  type="submit"
                   disabled={ pristine || submitting }
-                  bsStyle="info" 
+                  bsStyle="info"
                   block>
                   Sign me up!
                 </Button>
@@ -134,4 +147,5 @@ class SignUpForm extends React.Component {
   }
 }
 
+SignUpForm = connect(mapStateToProps, null)(SignUpForm);
 export default reduxForm({ form: 'SignUpFform', validate })(SignUpForm);

@@ -1,6 +1,31 @@
 import request from 'request-promise';
 import APP_CONFIG from '../config/config';
 
+const signUpUser = (form) => {
+  return (dispatch) => {
+    const options = {
+      uri: `${APP_CONFIG.API_ENDPOINT}/user/signup`,
+      method: 'POST',
+      form: { ...form },
+      json: true
+    };
+    
+    return request(options)
+    .then(response => {
+      dispatch ({
+        type: 'SIGNUP_USER',
+        payload: { ...response }
+      });
+    })
+    .catch(err => {
+      dispatch ({
+        type: 'SIGNUP_USER',
+        payload: { ...err }
+      });
+    });
+  };
+};
+
 const loginUser = (form) => {
   return (dispatch) => {
     const options = {
@@ -11,19 +36,19 @@ const loginUser = (form) => {
     };
   
     return request(options)
-      .then(response => {
-        dispatch ({
-          type: 'LOGIN_USER',
-          payload: {
-            user : {
-              user: response.data.user,
-              token: response.data.token,
-              profile: response.data.profile
-            },
-            isAuthenticated: true
-          }
-        });
+    .then(response => {
+      dispatch ({
+        type: 'LOGIN_USER',
+        payload: {
+          user : {
+            user: response.data.user,
+            token: response.data.token,
+            profile: response.data.profile
+          },
+          isAuthenticated: true
+        }
       });
+    });
   }
 };
 
@@ -105,6 +130,7 @@ const submitChangeUserPreference = (user) => {
 
 export {
   loginUser,
+  signUpUser,
   getUserProfile,
   updateUserPreference,
   submitChangeUserPreference
