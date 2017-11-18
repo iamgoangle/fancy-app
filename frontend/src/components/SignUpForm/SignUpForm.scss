@@ -1,0 +1,38 @@
+$signup_box_bg_color: #345C7F;
+$top_form_color: #FFF;
+$content_form_bg: #647799;
+
+div {
+  &.signup_form {
+    
+  }
+
+  .top_form {
+    -webkit-border-radius: 5px 5px 0 0;
+    border-radius: 5px 5px 0 0;
+    background: $signup_box_bg_color;
+    padding: 6px;
+    color: $top_form_color;
+
+    .header {
+      font-size: 1.5rem;
+    }
+    .logo {
+      font-size: 5rem;
+      text-align: center;
+    }
+  }
+
+  .content_form {
+    -webkit-border-radius: 0 0 5px 5px;
+    border-radius: 0 0 5px 5px;
+    background: $content_form_bg;
+    color: $top_form_color;
+    padding: 6px;
+    padding-bottom: 20px;
+  }
+
+  .textfield {
+    color: $top_form_color;
+  }
+}
