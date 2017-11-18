@@ -2,7 +2,18 @@ const User = require('../models/user');
 const userService = require('../services/user.service');
 const HashService = require('../services/hash.util');
 
-const signup = (req, res, next) => {
+const signup = async (req, res, next) => {
+  const user = await userService.getUserByUsername(req.body.username);
+
+  if (user) {
+    res.status(200)
+    .json({ 
+      success: false,
+      message: 'Username has been taken, please try a new username instead',
+      data: {} 
+    });
+  }
+ 
   const demo = new User({
     username: req.body.username,
     password: HashService.generateHash(req.body.password),
@@ -17,15 +28,12 @@ const signup = (req, res, next) => {
     }
   });
 
-  return demo.save(err => {
-    if (err) {
-      res.status(200).json({ success: false, data: err });
-      throw err;
-    }
-
-    console.log('User saved successfully');
-
-    res.status(200).json({ success: true, data: demo });
+  const newUser = await demo.save();
+  res.status(200)
+  .json({ 
+    success: true,
+    message: 'Signup successful', 
+    data: demo 
   });
 };
 
