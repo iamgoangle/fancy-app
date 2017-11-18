@@ -1,11 +1,47 @@
 import React from 'react'
-import { Field, reduxForm } from 'redux-form';
-import { TextField } from 'redux-form-material-ui'
+import { Field, reduxForm, isDirty } from 'redux-form';
+// import { TextField } from 'redux-form-material-ui'
+import TextField from 'material-ui/TextField'
 import { Well, Panel, Button, Col, Row, Clearfix } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 import styles from "./SignUpForm.scss";
+import { error } from 'util';
 
+const validate = (values) => {
+  const errors = [];
+  const requireFields = [
+    'username',
+    'password'
+  ];
+
+  requireFields.forEach(field => {
+    if (!values[field]) {
+      errors[field] = 'Required'
+    }
+  });
+
+  return errors;
+};
+
+const renderTextField = ({
+  input,
+  floatingLabelText,
+  hintText,
+  errorStyle,
+  meta: { touched, error },
+  ...custom
+}) => (
+  <TextField
+    hintText={ hintText }
+    floatingLabelText={ floatingLabelText }
+    fullWidth={ true }
+    errorText={ touched && error }
+    errorStyle={ errorStyle }
+    {...input}
+    {...custom}
+    />
+);
 class SignUpForm extends React.Component {
   constructor (props) {
     super(props);
@@ -19,8 +55,12 @@ class SignUpForm extends React.Component {
       },
       hintStyle: {
         color: '#c4c4c4'
+      },
+      errorStyle: {
+        color: '#ffc672'
       }
     };
+    
     return (
       <form onSubmit={ handleSubmit }>
         <div className={ styles.signup_form }>
@@ -40,30 +80,28 @@ class SignUpForm extends React.Component {
                 <Field
                   id="username"
                   name="username"
+                  component={ renderTextField }
                   className={ styles.textfield }
                   floatingLabelText="Username"
                   floatingLabelStyle={ textfieldStyles.floatingLabelStyle }
-                  component={ TextField }
-                  autoComplete="off"
                   hintText="Specific your username"
-                  hintStyle={textfieldStyles.hintStyle}
-                  type="text"
-                  fullWidth={ true } />
+                  hintStyle={ textfieldStyles.hintStyle }
+                  errorStyle={ textfieldStyles.errorStyle }
+                  autoComplete="off" />
               </div>
 
               <div>
-                <Field
+              <Field
                   id="password"
                   name="password"
+                  component={ renderTextField }
                   className={ styles.textfield }
                   floatingLabelText="Password"
                   floatingLabelStyle={ textfieldStyles.floatingLabelStyle }
-                  component={ TextField }
-                  autoComplete="off"
                   hintText="Choose your password"
-                  hintStyle={textfieldStyles.hintStyle}
-                  type="text"
-                  fullWidth={ true } />
+                  hintStyle={ textfieldStyles.hintStyle }
+                  errorStyle={ textfieldStyles.errorStyle }
+                  autoComplete="off" />
               </div>
 
               <div>
@@ -78,10 +116,22 @@ class SignUpForm extends React.Component {
             </Col>
           </Row>
           <Clearfix />
+
+          <Row>
+            <Col md={12}>
+              <div className={ styles.copyright }>
+                <i className="fa fa-beer" aria-hidden="true"></i>
+                &nbsp;
+                <span>
+                  <a href="https://github.com/iamgoangle/">iamgoagle</a>
+                </span>
+              </div>
+            </Col>
+          </Row>
         </div>
       </form>
     )
   }
 }
 
-export default reduxForm({ form: 'SignUpFform' })(SignUpForm);
+export default reduxForm({ form: 'SignUpFform', validate })(SignUpForm);
