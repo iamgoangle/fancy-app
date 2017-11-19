@@ -11,6 +11,7 @@ import RightPane from '../components/UserPreperence/RightPane';
 import { getCurrencies } from '../services/currency-service';
 import { getLanguages } from '../services/language-service';
 import { getTimezones } from '../services/timezone-service';
+import { getUserIdentity } from '../services/authentication-service';
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -34,7 +35,7 @@ class UserPreference extends React.Component {
     };
 
     // get user profile when refresh or landing to this page
-    this.props.getUserProfile(window.localStorage.getItem('user'));
+    this.props.getUserProfile(getUserIdentity());
   }
 
   async componentDidMount () {

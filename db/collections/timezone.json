@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "value": "(GMT) Western Europe Time, London, Lisbon, Casablanca"
+  },
+  {
+    "id": 2,
+    "value": "(GMT +1:00 hour) Brussels, Copenhagen, Madrid, Paris"
+  },
+  {
+    "id": 3,
+    "value": "(GMT +2:00) Kaliningrad, South Africa"
+  },
+  {
+    "id": 4,
+    "value": "(GMT +3:00) Baghdad, Riyadh, Moscow, St. Petersburg"
+  },
+  {
+    "id": 5,
+    "value": "(GMT +3:00) Baghdad, Riyadh, Moscow, St. Petersburg"
+  },
+  {
+    "id": 6,
+    "value": "(GMT +7:00) Bangkok, Hanoi, Jakarta"
+  }
+]

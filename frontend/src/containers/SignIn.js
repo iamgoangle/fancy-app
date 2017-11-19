@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { loginUser } from '../actions/userActions';
 import SignInForm from '../components/SignInForm';
+import { setStorage } from '../services/authentication-service';
 
 const mapStateToProps = (state) => {
   return {
@@ -32,8 +33,8 @@ class SignIn extends React.Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    localStorage.setItem('user', nextProps.user.user.user);
-    localStorage.setItem('token', nextProps.user.user.token);
+    setStorage('user', nextProps.user.user.user);
+    setStorage('token', nextProps.user.user.token);
     this.setState({ user: { ...nextProps.user }, redirectToUserPreference: true });
   }
 

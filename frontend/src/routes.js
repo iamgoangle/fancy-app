@@ -5,15 +5,18 @@ import UserPreference from './containers/UserPreference';
 const routes = [
   {
     path: '/',
-    component: SignIn
+    component: SignIn,
+    requireAuth: false
   },
   {
     path: '/signup',
-    component: SignUp
+    component: SignUp,
+    requireAuth: false
   },
   {
     path: '/UserPreference',
-    component: UserPreference
+    component: UserPreference,
+    requireAuth: true
   }
 ];
 

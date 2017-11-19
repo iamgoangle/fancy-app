@@ -1,10 +1,12 @@
+import { isLoggedIn } from '../services/authentication-service';
+
 let initState = {
   user: {
       user: '',
       token: '',
       profile: {}
   },
-  isAuthenticated: (window.localStorage.getItem('token')) ? true : false
+  isAuthenticated: isLoggedIn()
 };
 
 const userReducer = (state = initState, action) => {

@@ -1,5 +1,6 @@
 import request from 'request-promise';
 import APP_CONFIG from '../config/config';
+import { getUserToken } from '../services/authentication-service';
 
 const signUpUser = (form) => {
   return (dispatch) => {
@@ -58,7 +59,7 @@ const getUserProfile = (username) => {
       uri: `${APP_CONFIG.API_ENDPOINT}/user/${username}`,
       method: 'POST',
       headers: {
-        'x-access-token': window.localStorage.getItem('token')
+        'x-access-token': getUserToken()
       },
       json: true
     };
@@ -71,7 +72,7 @@ const getUserProfile = (username) => {
           payload: {
             user : {
               user: response.data.user,
-              token: window.localStorage.getItem('token'),
+              token: getUserToken(),
               profile: response.data.profile
             },
             isAuthenticated: true
@@ -105,7 +106,7 @@ const submitChangeUserPreference = (user) => {
         payload: newProfile
       },
       headers: {
-        'x-access-token': window.localStorage.getItem('token')
+        'x-access-token': getUserToken()
       },
       json: true
     };
@@ -118,7 +119,7 @@ const submitChangeUserPreference = (user) => {
           payload: {
             user : {
               user: response.data.user,
-              token: window.localStorage.getItem('token'),
+              token: getUserToken(),
               profile: response.data.profile
             },
             isAuthenticated: true
