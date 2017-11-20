@@ -27,6 +27,7 @@
     "font-awesome": "^4.7.0",
     "fs-extra": "3.0.1",
     "html-webpack-plugin": "2.29.0",
+    "jest-cli": "^21.2.1",
     "material-ui": "^0.19.4",
     "node-sass": "^4.6.0",
     "object-assign": "4.1.1",
@@ -107,8 +108,10 @@
     "extends": "react-app"
   },
   "devDependencies": {
+    "enzyme": "^3.2.0",
     "file-loader": "^1.1.5",
     "jest": "^21.2.1",
+    "react-addons-test-utils": "^15.6.2",
     "redux-logger": "^3.0.6"
   }
 }

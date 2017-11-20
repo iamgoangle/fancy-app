@@ -29,6 +29,18 @@ This boilerplate project will show you for how mult-tier connecting together fro
 - Helmet
 - NSP
 
+## Testing
+- Jest
+- Enzyme
+- Mocha
+- Istanbul
+- proxy-quire
+
+# Highlight
+## Refresh + Access token
+This repository has been implmented token based authentication and applied refresh+access token strategy accordingly to 
+- https://auth0.com/learn/refresh-tokens/ 
+- https://auth0.com/blog/refresh-tokens-what-are-they-and-when-to-use-them/
 
 # Table of Contents
 
@@ -37,4 +49,5 @@ This boilerplate project will show you for how mult-tier connecting together fro
 - Install all dependencies by change directory to *frontend* and *backend* then ```npm i```
 - Install **mongodb** on your machine
 - Run bash for initiate mongo collection
+
 # Usage

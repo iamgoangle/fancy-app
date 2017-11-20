@@ -1,12 +1,10 @@
 import React from 'react';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import TextField from 'material-ui/TextField'
 import { Button, Col, Row, Clearfix } from "react-bootstrap";
 
 import styles from "./SignUpForm.scss";
-import { error } from 'util';
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -52,10 +50,6 @@ const renderTextField = ({
 );
 
 class SignUpForm extends React.Component {
-  constructor (props) {
-    super(props);
-  }
-  
   render () {
     const { handleSubmit, pristine, submitting, handleSignup } = this.props;
     const textfieldStyles = {
