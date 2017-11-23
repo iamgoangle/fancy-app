@@ -1,17 +1,18 @@
-/**
- * @description TOKEN SETTING
- * @see https://www.npmjs.com/package/jsonwebtoken
- */
+// =======================================================================
+// ==============   @author Teerapong Singthong ==========================
+// = DO NOT CHANGE VALUE DIRECTLY IN THIS FILE PLS CONSIDER .env INSTEAD =
+// =======================================================================
 
 const APP_CONFIG = {
-  API_SECRET: 'secretfortaskworld',
-  MONGO_URL: 'mongodb://localhost/fancy-app',
+  API_SECRET: process.env.API_SECRET,
+  MONGO_URL: process.env.DB_HOST,
   TOKEN: {
-    EXPIRE: '60m'
+    EXPIRE: process.env.ACCESS_TOKEN_EXPIRED,
+    REFRESH: process.env.REFRESH_TOKEN_EXPIRED
   },
   CORS: {
-    origin: 'http://localhost:3000',
-    credentials: true
+    origin: process.env.CORS_ORIGIN,
+    credentials: process.env.CORS_CREDENTIAL
   }
 };
 

@@ -10,7 +10,7 @@ const signup = async (req, res, next) => {
     .json({ 
       success: false,
       message: 'Username has been taken, please try a new username instead',
-      data: {} 
+      data: {}
     });
   }
  

@@ -1,11 +1,8 @@
-const AuthenticationRoute = require('express').Router();
-const jwt = require('jsonwebtoken');
 const HashService = require('../services/hash.util');
-const APP_CONFIG = require('../config');
-
 const User = require('../models/user');
+const tokenService = require('../services/token.service');
 
-const authenticate = (req, res, next) => {
+const authenticate = (req, res) => {
   User.findOne({ username: req.body.username }, (err, user) => {
     if (err) throw err;
 
@@ -22,12 +19,9 @@ const authenticate = (req, res, next) => {
           admin: user.admin,
           profile: user.profile
         };
-
+        
         // generate token with payload
-        const token = jwt.sign(payload, app.get('superSecret'), {
-          algorithm: 'HS256',
-          expiresIn: APP_CONFIG.TOKEN.EXPIRE
-        });
+        const token = tokenService.generateAccessToken(payload);
 
         res.status(200).json({
           success: true,

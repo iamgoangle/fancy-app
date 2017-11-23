@@ -1,3 +1,4 @@
+/* global document */
 global.logger = require('./services/logger.util');
 
 const express = require('express');
@@ -5,11 +6,9 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const passport = require('passport');
-const jwt = require('jsonwebtoken');
 const cors = require('cors');
-
 const helmet = require('helmet');
-
+require('dotenv').config();
 const APP_CONFIG = require('./config');
 global.app = express();
 
@@ -30,8 +29,11 @@ try {
     useMongoClient: true
   });
   mongoose.Promise = global.Promise;
+  /*eslint-disable no-alert, no-console */
+  console.log('Connected database');
 } catch (err) {
-  logger.error(err);
+  /*eslint-disable no-alert, no-console */
+  console.error(err);
 }
 
 app.set('superSecret', APP_CONFIG.API_SECRET);
@@ -90,6 +92,7 @@ app.get('/api/timezone/getTimezones', TimezoneController);
 app.get('/api/language/getLanguages', LanguageController);
 
 app.listen(port, () => {
+  /*eslint-disable no-alert, no-console */
   console.log(`Start the server at http://localhost:${port}`);
   console.log(`CORS-enabled web server with options ${JSON.stringify(corsOption)}`);
 });

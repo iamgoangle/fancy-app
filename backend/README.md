@@ -1,23 +1,69 @@
-## Project structure
+# :ok_woman: goangle fullstack api
+This project provides you the boilerplate for generate the RESTFul with Authentication as JWT token based.
+
+# Table of Contents
+Updating...
+
+## :panda_face: Requirements
+- NodeJs 8.0+
+- MongoDB
+
+You will install nodejs on your development environment. I totally recommended using `nvm`
+
+## Installation
+1. Install app depedencies via `npm install`
+or
+`yarn install`
+2. Import database collection via `seed.sh`
+3. config .env to relate with your infrastructure
+
+## :wrench: .env Example
+```
+DB_HOST=mongodb://localhost/fancy-app
+DB_USER=
+DB_PASSWORD=
+
+PORT=5000
+
+ENVIRONMENT=development
+
+API_SECRET=goangleSecret
+
+ACCESS_TOKEN_EXPIRED=6m
+REFRESH_TOKEN_EXPIRED=8h
+
+CORS_ORIGIN=http://localhost:3000
+CORS_CREDENTIAL=true
+```
+
+## :bicyclist: Usage example (for dev)
+`npm run start:dev`
+or
+`yarn start:dev`
+
+# :open_file_folder: Project Structure
+
 ```sh
-.
 ├── README.md
 ├── config
 ├── controllers
 ├── middlewares
 ├── models
 ├── node_modules
-├── package-lock.json
 ├── package.json
 ├── routes.js
 ├── server.js
-└── services
+├── services
 ```
 
-## TODO
-Add double token strategy, the use ase is as below:
-- When user logged-in the system will be generated `refresh_token` and make age it equal 2-5 minutes
-- When user request the resoure or micro services, the middleware will checks `access_token` if it does not exists, it should be pull from `refresh_token`, if so thrown an error or redirect user to login page
+## :zap: Features
+:ballot_box_with_check: Token based authentication
+
+:ballot_box_with_check:Refresh token and Access token
+
+:ballot_box_with_check:Auto load process.env (only dev)
+
+:ballot_box_with_check:Helmet security
 
 ## Technology Stacks
 - Express
@@ -27,13 +73,10 @@ Add double token strategy, the use ase is as below:
 - Passport.js
 - JWT
 - morgan
-- ~~Winston~~
+- Winston
 - bcrypt
 - Helmet
-
-## Prerequsition
-- Installed mongodb
-- Config database and token expired in `./config.js`
+- dotenv
 
 ## API Routes
 ```
@@ -68,7 +111,6 @@ curl -X GET \
   -H 'cache-control: no-cache' \
   -H 'x-access-token: <golf token>
 ```
-
 ### Login use case
 ```
 curl -X POST \
