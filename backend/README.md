@@ -2,7 +2,7 @@
 This project provides you the boilerplate for generate the RESTFul with Authentication as JWT token based.
 
 # Table of Contents
-Updating...
+Waiting for update...
 
 ## :panda_face: Requirements
 - NodeJs 8.0+
@@ -55,7 +55,6 @@ or
 ├── server.js
 ├── services
 ```
-
 ## :zap: Features
 :ballot_box_with_check: Token based authentication
 
@@ -78,24 +77,31 @@ or
 - Helmet
 - dotenv
 
-## API Routes
-```
-No authentication needed routes
+# API Routes
 
-User registration use case
-http://localhost:3000/api/user/signup
+:key: = Authentication required
 
-User logged-in use case
-http://localhost:3000/api/login
+## Authentication
+POST `/api/login`
 
-Required authentication in header
-http://localhost:3000/api/user/getUsers
-```
+## User
+:key: POST `/api/user/signup`
 
-## Access token based authentication only
-This version not supports Refresh token, it only have token based authentication only.
+:key: POST `/api/user/:username`
 
-## Testing
+:key: POST `/api/user/getUsers`
+
+:key: POST `/api/user/updateUserPreference`
+
+## Currecy
+GET `/api/currency/getCurrencies`
+
+## Timezone
+GET `/api/timezone/getTimezones`
+
+## Language
+GET `/api/language/getLanguages`
+
 ### Create a simeple user
 ```
 curl -X GET \
