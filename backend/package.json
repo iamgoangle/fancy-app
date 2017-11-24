@@ -19,14 +19,22 @@
     "winston": "^2.4.0"
   },
   "devDependencies": {
+    "chai": "^4.1.2",
     "eslint": "^4.11.0",
     "eslint-config-airbnb-base": "^12.1.0",
-    "eslint-plugin-import": "^2.8.0"
+    "eslint-plugin-import": "^2.8.0",
+    "mocha": "^4.0.1",
+    "nock": "^9.1.0",
+    "nyc": "^11.3.0",
+    "proxyquire": "^1.8.0",
+    "sinon": "^4.1.2"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "start:dev": "nodemon -r dotenv/config server.js"
+    "start:dev": "node -r dotenv/config ./src/server.js",
+    "test": "./node_modules/.bin/mocha --colors --timeout 10000 src/*.spec.js src/**/*.spec.js",
+    "test:watch": "./node_modules/.bin/mocha --colors --timeout 10000 src/*.spec.js src/**/*.spec.js --watch",
+    "cover": "./node_modules/nyc/bin/nyc.js npm test"
   },
   "author": "Teerapong Singthong",
   "license": "ISC"

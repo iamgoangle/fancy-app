@@ -15,7 +15,7 @@ module.exports = (passport) => {
 
   // TODO: Refactoring. Do it need to check with db every authenticate?
   // [1] Is it enought with jwt.verify?
-  passport.use(new JwtStrategy(jwtOptions, (jwt_payload, next) => {
+  passport.use('jwt', new JwtStrategy(jwtOptions, (jwt_payload, next) => {
     User.findOne({ username: jwt_payload.username }, (err, user) => {
       if (err) {
         next(null, err, { message: 'Unauthorized to access' });
