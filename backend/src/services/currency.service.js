@@ -9,7 +9,8 @@ const getCurrencies = async () => {
 
     return result;
   } catch (err) {
-    console.error(err);
+    // console.error(err);
+    return err;
   }
 };
 

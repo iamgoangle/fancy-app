@@ -13,8 +13,7 @@
   ],
   "reporter": [
     "lcov",
-    "text-summary",
-    "html"
+    "text-summary"
   ],
   "all": true
 }
