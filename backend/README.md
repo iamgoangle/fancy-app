@@ -2,22 +2,39 @@
 This project provides you the boilerplate for generate the RESTFul with Authentication as JWT token based.
 
 # Table of Contents
-Waiting for update...
+- [Requirement](#panda_face-requirements)
+- [Installation](#installation)
+- [Usage example (for dev)](#bicyclist-usage_example_for_dev)
+- [Coverage](#coverage)
+- Project Struture
+- Features
+- [Technology](#technology)
+- [API Routes](#api_route)
 
-## :panda_face: Requirements
+# :panda_face: Requirements
 - NodeJs 8.0+
 - MongoDB
 
 You will install nodejs on your development environment. I totally recommended using `nvm`
 
-## Installation
-1. Install app depedencies via `npm install`
-or
-`yarn install`
-2. Import database collection via `seed.sh`
-3. config .env to relate with your infrastructure
+# Installation
+**This project implement based on nodejs so you would need install npm module dependency via**
+```sh
+npm i
 
-## :wrench: .env Example
+or
+
+yarn install
+```
+
+**In order to import mongo db collection you should change your current directoty to `./db` and then run the command as below**
+```
+seed.sh
+```
+
+**config .env to relate with your infrastructure**
+
+:wrench: .env Example
 ```
 DB_HOST=mongodb://localhost/fancy-app
 DB_USER=
@@ -36,10 +53,15 @@ CORS_ORIGIN=http://localhost:3000
 CORS_CREDENTIAL=true
 ```
 
-## :bicyclist: Usage example (for dev)
+# :bicyclist: Usage example (for dev)
 `npm run start:dev`
 or
 `yarn start:dev`
+
+# Coverage
+```sh
+npm run cover
+```
 
 # :open_file_folder: Project Structure
 
@@ -55,7 +77,8 @@ or
 ├── server.js
 ├── services
 ```
-## :zap: Features
+
+# :zap: Features
 :ballot_box_with_check: Token based authentication
 
 :ballot_box_with_check:Refresh token and Access token
@@ -64,7 +87,7 @@ or
 
 :ballot_box_with_check:Helmet security
 
-## Technology Stacks
+# Technology
 - Express
 - Mongo
 - Mongoose
@@ -101,27 +124,3 @@ GET `/api/timezone/getTimezones`
 
 ## Language
 GET `/api/language/getLanguages`
-
-### Create a simeple user
-```
-curl -X GET \
-  http://localhost:3000/api/user/signup \
-  -H 'cache-control: no-cache' \
-  -H 'x-access-token: <golf token>'
-```
-
-### Get All User in system
-```
-curl -X GET \
-  http://localhost:3000/api/user/getUsers \
-  -H 'cache-control: no-cache' \
-  -H 'x-access-token: <golf token>
-```
-### Login use case
-```
-curl -X POST \
-  http://localhost:3000/api/authentication \
-  -H 'cache-control: no-cache' \
-  -H 'content-type: application/x-www-form-urlencoded' \
-  -d 'username=golf&password=golf'
-```
