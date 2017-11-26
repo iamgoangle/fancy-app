@@ -5,7 +5,18 @@ This boilerplate project will show you for how mult-tier connecting together fro
 
 :yum: Please note that there is no best practice included inside the project, it is just a simple end-to-end component connecting together.
 
-# Technologies Stack
+# Table of Contents
+- [Technologies Stack](#technologies)
+  - [Frontend](#frontend)
+  - [Backend](#backend)
+  - [Database](#database)
+  - [Security](#security)
+  - [Testing](#testing)
+- [Highlight](#highlight)
+- [Installation](#installation)
+- [Usage](#usage)
+
+# Technologies
 ## :ok_woman: Frontend
 - React
 - Redux
@@ -42,12 +53,11 @@ This repository has been implmented token based authentication and applied refre
 - https://auth0.com/learn/refresh-tokens/ 
 - https://auth0.com/blog/refresh-tokens-what-are-they-and-when-to-use-them/
 
-# Table of Contents
-
 # Installation
 - Clone this project `git clone https://github.com/iamgoangle/fancy-app.git`
-- Install all dependencies by change directory to *frontend* and *backend* then ```npm i```
-- Install **mongodb** on your machine
-- Run bash for initiate mongo collection
+- In order to able install entire dependencies on both tier frontend and backend, you would need follows the instruction at
+  - [Frontend](https://github.com/iamgoangle/fancy-app/blob/master/frontend/README.md)
+  - [Backend and Database](https://github.com/iamgoangle/fancy-app/blob/master/backend/README.md)
 
 # Usage
+Please see more on `./Frontend` and `./Backend`
