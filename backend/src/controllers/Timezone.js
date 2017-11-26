@@ -1,7 +1,6 @@
-const APP_CONFIG = require('../config');
 const timezoneService = require('../services/timezone.service');
 
-module.exports = async (req, res, next) => {
+module.exports = async (req, res) => {
   try {
     const result = await timezoneService.getTimezones();
     res.status(200).json({

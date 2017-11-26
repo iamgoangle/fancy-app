@@ -1,7 +1,6 @@
-const APP_CONFIG = require('../config');
 const currencyService = require('../services/currency.service');
 
-module.exports = async (req, res, next) => {
+module.exports = async (req, res) => {
   try {
     const result = await currencyService.getCurrencies();
     res.status(200).json({
