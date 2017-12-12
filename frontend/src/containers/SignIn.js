@@ -6,20 +6,25 @@ import { loginUser } from '../actions/userActions';
 import SignInForm from '../components/SignInForm';
 import { setStorage } from '../services/authentication-service';
 
-const mapStateToProps = (state) => {
+import styles from './SignIn.scss';
+
+const mapStateToProps = state => {
   return {
     user: state.user
   };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-  return bindActionCreators({
-    loginUser: loginUser
-  }, dispatch);
+  return bindActionCreators(
+    {
+      loginUser: loginUser
+    },
+    dispatch
+  );
 };
 
 class SignIn extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
     this.state = {
       user: {},
@@ -28,28 +33,31 @@ class SignIn extends React.Component {
     this.handleLogin = this.handleLogin.bind(this);
   }
 
-  handleLogin (formValue) {
+  handleLogin(formValue) {
     this.props.loginUser(formValue);
   }
 
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps(nextProps) {
     setStorage('user', nextProps.user.user.user);
     setStorage('token', nextProps.user.user.token);
-    this.setState({ user: { ...nextProps.user }, redirectToUserPreference: true });
+    this.setState({
+      user: { ...nextProps.user },
+      redirectToUserPreference: true
+    });
   }
 
   render() {
     const { redirectToUserPreference } = this.state;
-    
+
     if (redirectToUserPreference) {
-      return (
-        <Redirect to='UserPreference' />
-      )
+      return <Redirect to="UserPreference" />;
     }
-    
+
     return (
-      <SignInForm handleLogin={ this.handleLogin } />
-    )
+      <div className={styles.signin_container}>
+        <SignInForm handleLogin={this.handleLogin} />
+      </div>
+    );
   }
 }
 
